@@ -1,3 +1,102 @@
 /**
- * Created by michelrosler on 01.04.15.
+ * Rest-API for Surveys
+ * @author Michel Roesler
  */
+var express = require('express');
+var router = express.Router();
+var Datacenter = require('./models/survey');
+
+// When accessing the speakers Routes
+router.route('/')
+
+    // create a suveys when the method passed is POST
+    .post(function(req, res) {
+        console.log(req);
+        // create a new instance of the Survey model
+        var survey = new Survey();
+
+        // set the speakers properties (comes from the request)
+        survey.name = req.body.name;
+        survey.street = req.body.street;
+        survey.number = req.body.number;
+        survey.locality = req.body.locality;
+        survey.zip = req.body.zip;
+        survey.location = req.body.location;
+        survey.web = req.body.web;
+        survey.mail = req.body.mail;
+        survey.schedule = req.body.schedule;
+
+        // save the data received
+        survey.save(function(err) {
+            if (err) {
+                res.send(err);
+            }
+            // give some success message
+            res.json({ message: 'survey successfully created!' });
+        });
+    })
+
+    // get all the survey when a method passed is GET
+    .get(function(req, res) {
+        Survey.find(function(err, datacenters) {
+            if (err){
+                res.send(err);
+            }
+
+            res.json(surveys);
+        });
+    });
+
+// on accessing datacenter Route by id
+router.route('/surveys/:survey_id')
+
+    // get the datacenter by id
+    .get(function(req, res) {
+        Survey.findById(req.params.survey_id, function(err, survey) {
+            if (err) {
+                res.send(err);
+            }
+            res.json(servey);
+        });
+    })
+
+    // update the survey by id
+    .put(function(req, res) {
+        Survey.findById(req.params.survey_id, function(err, survey) {
+
+            if (err){
+                res.send(err);
+            }
+
+            // set the survey properties (comes from the request)
+            survey.name = req.body.name;
+            survey.company = req.body.company;
+            survey.title = req.body.title;
+            survey.description = req.body.description;
+            survey.picture = req.body.picture;
+            survey.schedule = req.body.schedule;
+
+            // save the data received
+            survey.save(function(err) {
+                if (err) {
+                    res.send(err);
+                }
+                // give some success message
+                res.json({ message: 'survey successfully updated!' });
+            });
+
+        });
+    })
+
+    // delete the datacente by id
+    .delete(function(req, res) {
+        Survey.remove({
+            _id: req.params.survey_id
+        }, function(err, survey) {
+            if (err) {
+                res.send(err);
+            }
+            // give some success message
+            res.json({ message: 'survey successfully deleted!' });
+        });
+    });
