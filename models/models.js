@@ -10,14 +10,18 @@ var Schema = mongoose.Schema;
  * @type {*|Schema}
  */
 var DatacenterSchema = new Schema({
-    name: { type: String, default: '' },
-    street: { type: String, default: '' },
-    number: { type: String, default: '' },
-    locality:{ type: String, default: '' },
-    zip: { type: String, default: '' },
-    web: { type: String, default: '' },
-    mail: { type: String, default: '' },
-    company: { type: String, default: '' },
+    name: String,
+    address: {
+        street: String,
+        number: Number,
+        zip: { type: Number, min:6, max: 6},
+        locality: String,
+    },
+    web: String,
+    mail: String,
+    company: String,
+    // fill survey by datacenter.ofObjectId.push(survey)
+    surveys: [{type: Schema.ObjectId , ref: 'Survey'}],
     createdOn: { type: Date,   default: Date.now}
 });
 
@@ -26,14 +30,8 @@ var DatacenterSchema = new Schema({
  * @type {*|Schema}
  */
 var SurveySchema = new Schema({
-    name: { type: String, default: '' },
-    street: { type: String, default: '' },
-    number: { type: String, default: '' },
-    locality: { type: String, default: '' },
-    zip: { type: String, default: '' },
-    web: { type: String, default: '' },
-    mail: { type: String, default: '' },
-    company: { type: String, default: '' },
+    company: String,
+    createdBy: { type: Schema.ObjectId , ref: 'User'},
     createdOn: { type: Date,   default: Date.now}
 });
 
@@ -42,11 +40,13 @@ var SurveySchema = new Schema({
  * @type {*|Schema}
  */
 var UserSchema = new Schema({
-    forname: { type: String, default: '' },
-    lastname: { type: String, default: '' },
-    company: { type: String, default: '' },
-    mail: { type: String, default: '' },
-    createdOn: { type: Date,   default: Date.now}
+    name: {
+        forname: String,
+        lastname: String
+    },
+    password: { type: String, default: 'test'},
+    mail: String,
+    createdOn: { type: Date, default: Date.now}
 });
 
 /**
