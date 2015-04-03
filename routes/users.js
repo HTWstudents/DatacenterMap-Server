@@ -4,11 +4,10 @@
  */
 var express = require('express');
 var router = express.Router();
-var User = require('./models/user');
-
+var User = require('../models/user');
 
 // When accessing the user Routes
-router.route('/')
+router.route('/users')
 
     // create a user when the method passed is POST
     .post(function(req, res) {
@@ -96,3 +95,5 @@ router.route('/users/:user_id')
             res.json({ message: 'user successfully deleted!' });
         });
     });
+
+module.exports = router;

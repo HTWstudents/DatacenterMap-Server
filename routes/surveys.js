@@ -4,10 +4,10 @@
  */
 var express = require('express');
 var router = express.Router();
-var Datacenter = require('./models/survey');
+var Survey = require('../models/survey');
 
 // When accessing the speakers Routes
-router.route('/')
+router.route('/surveys')
 
     // create a suveys when the method passed is POST
     .post(function(req, res) {
@@ -38,7 +38,7 @@ router.route('/')
 
     // get all the survey when a method passed is GET
     .get(function(req, res) {
-        Survey.find(function(err, datacenters) {
+        Survey.find(function(err, surveys) {
             if (err){
                 res.send(err);
             }
@@ -47,16 +47,16 @@ router.route('/')
         });
     });
 
-// on accessing datacenter Route by id
+// on accessing survey Route by id
 router.route('/surveys/:survey_id')
 
-    // get the datacenter by id
+    // get the survey by id
     .get(function(req, res) {
         Survey.findById(req.params.survey_id, function(err, survey) {
             if (err) {
                 res.send(err);
             }
-            res.json(servey);
+            res.json(survey);
         });
     })
 
@@ -88,7 +88,7 @@ router.route('/surveys/:survey_id')
         });
     })
 
-    // delete the datacente by id
+    // delete the survey by id
     .delete(function(req, res) {
         Survey.remove({
             _id: req.params.survey_id
@@ -100,3 +100,5 @@ router.route('/surveys/:survey_id')
             res.json({ message: 'survey successfully deleted!' });
         });
     });
+
+module.exports = router;

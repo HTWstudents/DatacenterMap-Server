@@ -4,7 +4,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var Datacenter = require('./models/datacenter');
+var Datacenter = require('../models/datacenter');
 
 // Default message when access the API folder through the browser
 router.get('/', function(req, res) {
@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 });
 
 // When accessing the speakers Routes
-router.route('/')
+router.route('/datacenters')
 
     // create a datacenter when the method passed is POST
     .post(function(req, res) {
@@ -107,3 +107,5 @@ router.route('/datacenters/:datacenter_id')
             res.json({ message: 'datacenter successfully deleted!' });
         });
     });
+
+module.exports = router;
