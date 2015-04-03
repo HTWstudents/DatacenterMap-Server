@@ -4,7 +4,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var Datacenter = require('../models/datacenter');
+var mongoose = require('mongoose');
+var Datacenter = mongoose.model('Datacenter');
 
 // Default message when access the API folder through the browser
 router.get('/', function(req, res) {

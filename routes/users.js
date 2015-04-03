@@ -4,7 +4,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var User = require('../models/user');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 // When accessing the user Routes
 router.route('/users')

@@ -4,7 +4,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var Survey = require('../models/survey');
+var mongoose = require('mongoose');
+var Survey = mongoose.model('Survey');
 
 // When accessing the speakers Routes
 router.route('/surveys')
