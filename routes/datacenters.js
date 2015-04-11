@@ -96,7 +96,7 @@ router.route('/datacenters/:datacenter_id')
         });
     })
 
-    // delete the datacente by id
+    // delete the datacenter by id
     .delete(function(req, res) {
         Datacenter.remove({
             _id: req.params.datacenter_id

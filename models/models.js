@@ -15,12 +15,12 @@ var DatacenterSchema = new Schema({
         street: String,
         number: Number,
         zip: { type: Number, min:6, max: 6},
-        locality: String,
+        locality: String
     },
     web: String,
     mail: String,
     company: String,
-    // fill survey by datacenter.ofObjectId.push(survey)
+    // fill survey by using the function: datacenter.ofObjectId.push(survey)
     surveys: [{type: Schema.ObjectId , ref: 'Survey'}],
     createdOn: { type: Date,   default: Date.now}
 });
@@ -40,12 +40,13 @@ var SurveySchema = new Schema({
  * @type {*|Schema}
  */
 var UserSchema = new Schema({
-    name: {
-        forname: String,
-        lastname: String
-    },
-    password: { type: String, default: 'test'},
+    username: String,
+    forname: String,
+    lastname: String,
+    role: String,
+    password: { type: String, default: 'yourPassword'},
     mail: String,
+    company: String,
     createdOn: { type: Date, default: Date.now}
 });
 

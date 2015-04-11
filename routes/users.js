@@ -16,12 +16,13 @@ router.route('/users')
         // create a new instance of the User model
         var user = new User();
 
-        // set the speakers properties (comes from the request)
+        // set the Users properties (comes from the request)
+        user.username = req.body.username;
         user.forname = req.body.forname;
         user.lastname = req.body.lastname;
+        user.role = req.body.role;
         user.mail = req.body.mail;
         user.company = req.body.company;
-        user.schedule = req.body.schedule;
 
         // save the data received
         user.save(function(err) {
@@ -65,12 +66,13 @@ router.route('/users/:user_id')
                 res.send(err);
             }
 
-            // set the datacenters properties (comes from the request)
+            // set the Users properties (comes from the request)
+            user.username = req.body.username;
             user.forname = req.body.forname;
             user.lastname = req.body.lastname;
+            user.role = req.body.role;
             user.mail = req.body.mail;
             user.company = req.body.company;
-            user.schedule = req.body.schedule;
 
             // save the data received
             user.save(function(err) {
@@ -84,7 +86,7 @@ router.route('/users/:user_id')
         });
     })
 
-    // delete the datacente by id
+    // delete the User by id
     .delete(function(req, res) {
         User.remove({
             _id: req.params.user_id
