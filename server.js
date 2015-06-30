@@ -7,16 +7,15 @@ var mongoose = require('mongoose');
 var app = express();
 
 // connect to our database
-//mongoose.connect('mongodb://it4green_mongoadmin:woarojHayb@localhost:20877/benchmark', {auth:{authdb:"admin"}});
 mongoose.connect('mongodb://localhost/test');
 
-//getting all models
+// require data models
 require('./models/models');
+
 // Defining the Routes for our API
 var authentication = require('./routes/auth')(passport);
-var datacenters = require('./routes/datacenters');
-var surveys = require('./routes/surveys');
-var users = require('./routes/users');
+var api = require('./routes/api');
+
 
 // configure app
 app.use(bodyParser.json());
@@ -28,9 +27,8 @@ var port = process.env.PORT || 6767; // where the application will run
 
 // register the route
 app.use('/auth', authentication);
-app.use('/api', users);
-app.use('/api', datacenters);
-app.use('/api', surveys);
+app.use('/api', api);
+
 
 //// Initialize Passport
 var initPassport = require('./passport-init');

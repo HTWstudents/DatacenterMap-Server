@@ -50,7 +50,7 @@ module.exports = function(passport){
     ));
 
     /**
-     * Is a Post Request routet by the Auth API
+     * Is a Post Request routed by Auth API
      * Handles User registration
      */
     passport.use('signup', new LocalStrategy({
@@ -79,11 +79,9 @@ module.exports = function(passport){
                         newUser.lastname = req.body.lastname;
                         newUser.role = req.body.role;
                         newUser.mail = req.body.mail;
-                        newUser,company = req.body.company;
+                        newUser.company = req.body.company;
                         newUser.password = createHash(password);
 
-                        console.log('==================================');
-                        console.log(JSON.stringify(newUser));
                         // save the user
                         newUser.save(function(err) {
                             if (err){

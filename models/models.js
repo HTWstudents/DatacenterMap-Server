@@ -20,7 +20,6 @@ var DatacenterSchema = new Schema({
     web: String,
     mail: String,
     company: String,
-    // fill survey by using the function: datacenter.ofObjectId.push(survey)
     surveys: [{type: Schema.ObjectId , ref: 'Survey'}],
     createdOn: { type: Date,   default: Date.now}
 });
@@ -33,6 +32,7 @@ var SurveySchema = new Schema({
     company: String,
     createdBy: { type: Schema.ObjectId , ref: 'User'},
     createdOn: { type: Date,   default: Date.now}
+    // TODO add survey fields
 });
 
 /**
@@ -54,6 +54,6 @@ var UserSchema = new Schema({
  * Exporting data models
  * @type {*|Model}
  */
-module.exports = mongoose.model('Datacenter', DatacenterSchema);
-module.exports = mongoose.model('Survey', SurveySchema);
-module.exports = mongoose.model('User', UserSchema);
+mongoose.model('Datacenter', DatacenterSchema);
+mongoose.model('Survey', SurveySchema);
+mongoose.model('User', UserSchema);

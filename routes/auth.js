@@ -1,6 +1,5 @@
 /**
  * Rest-API for Registration and Login
- * @author Michel Rösler
  */
 var express = require('express');
 var router = express.Router();
